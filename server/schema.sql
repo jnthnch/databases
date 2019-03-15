@@ -9,9 +9,8 @@ CREATE TABLE messages (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT,
   room_id INT,
-  message VARCHAR(140) NULL DEFAULT NULL
+  text VARCHAR(140) NULL DEFAULT NULL
 );
-
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY, 
@@ -23,10 +22,11 @@ CREATE TABLE rooms (
   name VARCHAR(20) NOT NULL
 );
 
-ALTER TABLE `messages` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
-ALTER TABLE `messages` ADD FOREIGN KEY (room_id) REFERENCES `rooms` (`id`);
+ALTER TABLE `messages` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`) ON DELETE CASCADE;
+ALTER TABLE `messages` ADD FOREIGN KEY (room_id) REFERENCES `rooms` (`id`) ON DELETE CASCADE;
+
+-- OPEN NOTE: may need to add a friends table
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
-
